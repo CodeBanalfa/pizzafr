@@ -1,5 +1,5 @@
 import {
-  Box,
+
   Button,
   Card,
   CardActions,
@@ -25,7 +25,7 @@ const PizzaCarte = ({ pizza }: CPropse) => {
           flexDirection: "row",
           alignItems: "center",
           borderRadius: "10px",
-          width: "100%",
+          width: "100%"
         }}
       >
         <CardMedia
