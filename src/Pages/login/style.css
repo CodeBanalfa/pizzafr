@@ -6,6 +6,8 @@
   padding: 0.5em;
   transform: translate(-50%, -50%);
   border-radius: 1em !important;
+  background: #3b438b;
+
 }
 
 .login form {
@@ -14,4 +16,5 @@
   gap: 1em;
   max-width: 20em;
   margin: auto;
+ 
 }

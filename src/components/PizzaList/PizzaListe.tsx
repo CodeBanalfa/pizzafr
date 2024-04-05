@@ -7,6 +7,7 @@ import "./style.css";
 
 interface Props {
   pizza: Pizza[];
+
 }
 
 const PizzaListe = ({ pizza }: Props) => {

@@ -1,31 +1,30 @@
 import React, { useState } from 'react';
-import { Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Header from './components/Header';
-import PizzaListe from './components/PizzaList/PizzaListe';
-import { mockDataPizza } from './data/MockData';
 import Login from './Pages/login';
+
+import Pizza from './Pages/Pizza';
+import PizzaG from './Pages/Pizza';
 
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   return (
-    <>
+    <Router>
       <Header />
       <main>
         {isAuthenticated ? (
           <Routes>
-            <Route path="/pizza" element={<PizzaListe pizza={mockDataPizza} />} /> 
+            <Route path="/pizza" element={<PizzaG/>} /> 
           </Routes>
         ) : (
           <Login setIsAuthenticated={setIsAuthenticated} />
-         
         )}
       </main>
-    </>
+    </Router>
   );
 }
 
 export default App;
-

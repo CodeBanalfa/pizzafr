@@ -1,0 +1,8 @@
+{
+    "common": {
+        "loginPlaceholder": "identifiant",
+        "passwordPlaceholder": "mot de passe",
+        "connect": "se connecter",
+        "loginError": "Connexion impossible"
+    }
+}
