@@ -81,13 +81,17 @@ const Login = ({ setIsAuthenticated }: Props) => {
           helperText={formik.touched.password && formik.errors.password}
           style={{ background: "#FAF7F7" }}
         />
-        <Button
-          variant="contained"
-          type="submit"
-          style={{ background: "#FFC300" }}
-        >
-          Connexion
-        </Button>
+        <Button size="large" style={{ color: "#FFC300",textDecoration:"underline",alignItems:"flex-end" ,marginLeft:"10em"}}>Créé un compt</Button>
+ 
+           <Button
+             variant="contained"
+              type="submit"
+               style={{ background: "#FFC300" ,}}
+                >
+                  Connexion
+           </Button>
+       
+       
       </form>
     </Card>
   );

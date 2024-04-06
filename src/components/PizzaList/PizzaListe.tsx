@@ -7,10 +7,10 @@ import "./style.css";
 
 interface Props {
   pizza: Pizza[];
-
+  handlePizzaChange: Function;
 }
 
-const PizzaListe = ({ pizza }: Props) => {
+const PizzaListe = ({ pizza,handlePizzaChange }: Props) => {
   return (
     <>
     <Typography  variant="h5" className="text">Sélectionnez vos pizza</Typography>
