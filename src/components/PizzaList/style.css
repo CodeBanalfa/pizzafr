@@ -1,0 +1,14 @@
+.toto {
+  text-align: right;
+  padding: 20px;
+  margin-right: 50;
+  flex-direction: row-reverse;
+}
+.text {
+  font-family: "Oswald", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  padding: 10px;
+
+}
