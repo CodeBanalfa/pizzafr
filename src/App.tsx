@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Login from "./Pages/login";
@@ -13,13 +13,20 @@ const App = () => {
     <>
       <Header />
       <main>
-        {isAuthenticated ? (
-          <Routes>
+        <Routes>
+          {isAuthenticated ? (
             <Route path="/" element={<PizzaG />} />
-          </Routes>
-        ) : (
-          <Login setIsAuthenticated={setIsAuthenticated} />
-        )}
+          ) : (
+            <Route
+              path="/"
+              element={<Login setIsAuthenticated={setIsAuthenticated} />}
+            />
+          )}
+          <Route
+            path="/Add"
+            element={<CreateAccount handleCreateAccount={Function} />}
+          />
+        </Routes>
       </main>
     </>
   );

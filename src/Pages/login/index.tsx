@@ -1,8 +1,8 @@
 import { Button, Card, TextField, Typography } from "@mui/material";
 import "./style.css";
-
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
@@ -74,7 +74,7 @@ const Login = ({ setIsAuthenticated }: Props) => {
           helperText={formik.touched.password && formik.errors.password}
           style={{ background: "#FAF7F7" }}
         />
-        <Link to="/CreateAccount" style={{ textDecoration: "none" }}>
+        <Link to="/Add" style={{ textDecoration: "none" }}>
           <Button
             size="large"
             style={{

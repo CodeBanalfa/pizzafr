@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Card, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import "./CreateAccount.css";
+import "./style.css";
 
 interface Props {
   handleCreateAccount: Function;
@@ -45,86 +45,96 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
   });
 
   return (
-    <Card className="create-account" elevation={10}>
+    <Card
+      className="create-account"
+      elevation={10}
+      style={{ background: "#3b438b" }}
+    >
       {error && (
         <Typography color="error">Error: Failed to create account</Typography>
       )}
       <form onSubmit={formik.handleSubmit} className="form">
-        <div className="input-group">
-          <TextField
-            fullWidth
-            id="firstName"
-            name="firstName"
-            label="First Name"
-            value={formik.values.firstName}
-            onChange={formik.handleChange}
-            error={formik.touched.firstName && Boolean(formik.errors.firstName)}
-            helperText={formik.touched.firstName && formik.errors.firstName}
-          />
-          <TextField
-            fullWidth
-            id="lastName"
-            name="lastName"
-            label="Last Name"
-            value={formik.values.lastName}
-            onChange={formik.handleChange}
-            error={formik.touched.lastName && Boolean(formik.errors.lastName)}
-            helperText={formik.touched.lastName && formik.errors.lastName}
-          />
-        </div>
-        <div className="input-group">
-          <TextField
-            fullWidth
-            id="password"
-            name="password"
-            type="password"
-            label="Password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            error={formik.touched.password && Boolean(formik.errors.password)}
-            helperText={formik.touched.password && formik.errors.password}
-          />
-          <TextField
-            fullWidth
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            label="Confirm Password"
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.confirmPassword &&
-              Boolean(formik.errors.confirmPassword)
-            }
-            helperText={
-              formik.touched.confirmPassword && formik.errors.confirmPassword
-            }
-          />
-        </div>
-        <div className="input-group">
-          <TextField
-            fullWidth
-            id="address"
-            name="address"
-            label="Address"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            error={formik.touched.address && Boolean(formik.errors.address)}
-            helperText={formik.touched.address && formik.errors.address}
-          />
-          <TextField
-            fullWidth
-            id="phoneNumber"
-            name="phoneNumber"
-            label="Phone Number"
-            value={formik.values.phoneNumber}
-            onChange={formik.handleChange}
-            error={
-              formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
-            }
-            helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
-          />
-        </div>
+        <Typography style={{ color: "#fbc02c" }}>nom</Typography>
+        <TextField
+          className="inputD"
+          fullWidth
+          id="firstName"
+          name="firstName"
+          value={formik.values.firstName}
+          onChange={formik.handleChange}
+          error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+          helperText={formik.touched.firstName && formik.errors.firstName}
+        />
+        <Typography style={{ color: "#fbc02c" }}>prénom</Typography>
+        <TextField
+          className="inputD"
+          fullWidth
+          id="lastName"
+          name="lastName"
+          value={formik.values.lastName}
+          onChange={formik.handleChange}
+          error={formik.touched.lastName && Boolean(formik.errors.lastName)}
+          helperText={formik.touched.lastName && formik.errors.lastName}
+        />
+
+        <Typography style={{ color: "#fbc02c" }}>Mot de passe</Typography>
+        <TextField
+          className="inputD"
+          fullWidth
+          id="password"
+          name="password"
+          type="password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          error={formik.touched.password && Boolean(formik.errors.password)}
+          helperText={formik.touched.password && formik.errors.password}
+        />
+        <Typography style={{ color: "#fbc02c" }}>confirm</Typography>
+        <TextField
+          className="inputD"
+          fullWidth
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          value={formik.values.confirmPassword}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.confirmPassword &&
+            Boolean(formik.errors.confirmPassword)
+          }
+          helperText={
+            formik.touched.confirmPassword && formik.errors.confirmPassword
+          }
+        />
+
+        <Typography style={{ color: "#fbc02c" }}>address</Typography>
+
+        <TextField
+          className="inputDA"
+          fullWidth
+          id="address"
+          name="address"
+          value={formik.values.address}
+          onChange={formik.handleChange}
+          error={formik.touched.address && Boolean(formik.errors.address)}
+          helperText={formik.touched.address && formik.errors.address}
+          style={{ width: "100%", height: "40%" }}
+        />
+
+        <Typography style={{ color: "#fbc02c" }}>Téléphone</Typography>
+        <TextField
+          className="inputD"
+          fullWidth
+          id="phoneNumber"
+          name="phoneNumber"
+          value={formik.values.phoneNumber}
+          onChange={formik.handleChange}
+          error={
+            formik.touched.phoneNumber && Boolean(formik.errors.phoneNumber)
+          }
+          helperText={formik.touched.phoneNumber && formik.errors.phoneNumber}
+        />
+
         <Button
           fullWidth
           variant="contained"
