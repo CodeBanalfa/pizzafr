@@ -79,7 +79,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
 
         <Typography style={{ color: "#fbc02c" }}>Mot de passe</Typography>
         <TextField
-          className="inputD"
+          className="inputE"
           fullWidth
           id="password"
           name="password"
@@ -91,7 +91,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         />
         <Typography style={{ color: "#fbc02c" }}>confirm</Typography>
         <TextField
-          className="inputD"
+          className="inputE"
           fullWidth
           id="confirmPassword"
           name="confirmPassword"
@@ -118,7 +118,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           onChange={formik.handleChange}
           error={formik.touched.address && Boolean(formik.errors.address)}
           helperText={formik.touched.address && formik.errors.address}
-          style={{ width: "100%", height: "40%" }}
+          style={{ width: "100%", height: "70%", flexFlow: "row wrap" }}
         />
 
         <Typography style={{ color: "#fbc02c" }}>Téléphone</Typography>
@@ -140,8 +140,14 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           variant="contained"
           type="submit"
           className="submit-button"
+          style={{
+            background: "#fbc02c",
+            width: "30px",
+            color: "black",
+            alignItems: "flex-end",
+          }}
         >
-          Create Account
+          Créer
         </Button>
       </form>
     </Card>
