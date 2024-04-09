@@ -22,6 +22,14 @@ const App = () => {
               element={<Login setIsAuthenticated={setIsAuthenticated} />}
             />
           )}
+          {isAuthenticated ? (
+            <Route path="/" element={<PizzaG />} />
+          ) : (
+            <Route
+              path="/"
+              element={<Login setIsAuthenticated={setIsAuthenticated} />}
+            />
+          )}
           <Route
             path="/Add"
             element={<CreateAccount handleCreateAccount={Function} />}

@@ -1,7 +1,7 @@
 .create-account {
   width: 50em;
   position: absolute;
-  top: 50%;
+  top: 65%;
   left: 50%;
   padding: 0.5em;
   transform: translate(-50%, -50%);
@@ -20,7 +20,7 @@
 }
 .create-account form {
   display: flex;
-  flex-direction: column;
+  flex-flow: column wrap;
   gap: 1em;
   max-width: 20em;
   margin: auto;
@@ -28,8 +28,26 @@
 .inputD {
   background: white;
 }
+.inputE {
+  background: white;
+  flex-flow: row wrap;
+}
+.inputDA,
+.inputD {
+  border-radius: 5px;
+  border: 1px solid #fbc02c;
+}
 .inputDA {
   background: white;
   width: 100px;
   height: 30%;
+}
+
+.submit-button {
+  background: #fbc02c;
+  color: #3b438b;
+  padding: 10px 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  align-items: flex-end;
 }
