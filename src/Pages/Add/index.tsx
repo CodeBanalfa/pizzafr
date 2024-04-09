@@ -62,7 +62,17 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <Typography color="error">Error: Failed to create account</Typography>
       )}
       <form onSubmit={formik.handleSubmit} className="form">
-        <Typography style={{ color: "#fbc02c" }}>nom</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            left: "10px",
+            top: "20px",
+          }}
+        >
+          nom
+        </Typography>
+
         <TextField
           className="nom"
           fullWidth
@@ -72,8 +82,23 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           onChange={formik.handleChange}
           error={formik.touched.firstName && Boolean(formik.errors.firstName)}
           helperText={formik.touched.firstName && formik.errors.firstName}
+          style={{
+            color: "#fbc02c",
+            right: "80%",
+            top: "0px",
+          }}
         />
-        <Typography style={{ color: "#fbc02c" }}>prénom</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            right: "30%",
+            top: "20px",
+            padding: "9px",
+          }}
+        >
+          prénom
+        </Typography>
         <TextField
           className="prnom"
           fullWidth
@@ -83,9 +108,23 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           onChange={formik.handleChange}
           error={formik.touched.lastName && Boolean(formik.errors.lastName)}
           helperText={formik.touched.lastName && formik.errors.lastName}
+          style={{
+            color: "#fbc02c",
+            left: "80%",
+            top: "-50px",
+          }}
         />
 
-        <Typography style={{ color: "#fbc02c" }}>Mot de passe</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            left: "10px",
+            top: "25%",
+          }}
+        >
+          Mot de passe
+        </Typography>
         <TextField
           className="Mdp"
           fullWidth
@@ -96,8 +135,23 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           onChange={formik.handleChange}
           error={formik.touched.password && Boolean(formik.errors.password)}
           helperText={formik.touched.password && formik.errors.password}
+          style={{
+            color: "#fbc02c",
+            right: "80%",
+            top: "0px",
+          }}
         />
-        <Typography style={{ color: "#fbc02c" }}>confirm</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            right: "30%",
+            top: "25%",
+            padding: "9px",
+          }}
+        >
+          confirm
+        </Typography>
         <TextField
           className="Cmdp"
           fullWidth
@@ -113,6 +167,11 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           helperText={
             formik.touched.confirmPassword && formik.errors.confirmPassword
           }
+          style={{
+            color: "#fbc02c",
+            left: "80%",
+            top: "-50px",
+          }}
         />
 
         <Typography style={{ color: "#fbc02c" }}>address</Typography>

@@ -1,21 +1,37 @@
 import {
-
   Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Chip,
+  TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import Pizza from "../../data/DataType";
 import "./style.css";
 
-interface CPropse {
+interface CProps {
   pizza: Pizza;
+  handleQuantityChange: (quantity: number) => void;
 }
-const PizzaCarte = ({ pizza }: CPropse) => {
+
+const PizzaCarte = ({ pizza, handleQuantityChange }: CProps) => {
+  const [quantity, setQuantity] = useState<number>(1); // Initialisé à 1 pour respecter le minimum requis
+
+  const handleIncrement = () => {
+    if (quantity < 10) {
+      setQuantity(quantity + 1);
+    }
+  };
+
+  const handleDecrement = () => {
+    if (quantity > 1) {
+      setQuantity(quantity - 1);
+    }
+  };
+
   return (
     <>
       <Card
@@ -25,7 +41,7 @@ const PizzaCarte = ({ pizza }: CPropse) => {
           flexDirection: "row",
           alignItems: "center",
           borderRadius: "10px",
-          width: "100%"
+          width: "100%",
         }}
       >
         <CardMedia
@@ -50,16 +66,35 @@ const PizzaCarte = ({ pizza }: CPropse) => {
           }}
         >
           <Typography variant="body2" color="text.secondary">
-            <Chip color="primary" label={`${pizza.price}€`} size="small" />
-            
+            <Chip
+              className="chip"
+              style={{ backgroundColor: "green", color: "white" }}
+              label={`${pizza.price}€`}
+              size="medium"
+            />
           </Typography>
           <CardActions>
             <Typography variant="body2" color="text.secondary">
-              quantité
+              Quantité
             </Typography>
-            <Button size="small">-</Button>
-
-            <Button size="small">+</Button>
+            <Button size="small" onClick={handleDecrement}>
+              -
+            </Button>
+            <TextField
+              type="number"
+              variant="outlined"
+              size="small"
+              value={quantity}
+              InputProps={{ inputProps: { min: 1, max: 10 } }} // Plage de 1 à 10
+              onChange={(e) => {
+                const newQuantity = parseInt(e.target.value);
+                setQuantity(newQuantity);
+                handleQuantityChange(newQuantity);
+              }}
+            />
+            <Button size="small" onClick={handleIncrement}>
+              +
+            </Button>
           </CardActions>
         </CardContent>
       </Card>

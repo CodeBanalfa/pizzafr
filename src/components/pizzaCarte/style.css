@@ -1,7 +1,17 @@
 .Carte {
   text-align: left;
-
 }
 .carte {
   text-align: right;
+}
+.chip {
+  padding: 5px;
+  margin-right: 80px;
+  width: 150px;
+  height: 75px;
+  font-family: cursive;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
