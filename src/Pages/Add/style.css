@@ -15,32 +15,30 @@
   margin-bottom: 20px;
 }
 
-.submit-button {
-  margin-top: 20px;
-}
 .create-account form {
-  display: flex;
-  flex-flow: column wrap;
-  gap: 1em;
-  max-width: 20em;
-  margin: auto;
-}
-.inputD {
-  background: white;
-}
-.inputE {
-  background: white;
-  flex-flow: row wrap;
-}
-.inputDA,
-.inputD {
+  font-family: Arial, sans-serif;
+  max-width: 300px;
+  margin: 20px auto;
+  padding: 20px;
   border-radius: 5px;
-  border: 1px solid #fbc02c;
 }
-.inputDA {
-  background: white;
-  width: 100px;
-  height: 30%;
+.nom,
+.prnom,
+.Mdp,
+.Cmdp,
+.addres,
+.tele {
+  background: #f1efea;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+}
+.nom,
+.prnom {
+  display: block;
+  margin-bottom: 10px;
 }
 
 .submit-button {
@@ -49,5 +47,22 @@
   padding: 10px 20px;
   font-weight: bold;
   margin-top: 20px;
-  align-items: flex-end;
+  right: 30%;
+}
+.pop {
+  position: absolute;
+  top: 50%;
+  right: 30%;
+  padding: 70%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: #3b438b;
+  color: #fbc02c;
+  border: 2px solid #000000;
+  box-shadow: 5px;
+  padding: 50px;
+  text-align: center;
+  font-family: "Times New Roman", Times, serif;
+  font-size: larger;
+  border-radius: 50px;
 }

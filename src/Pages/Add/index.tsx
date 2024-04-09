@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Button, Card, TextField, Typography } from "@mui/material";
+import { Box, Button, Card, Modal, TextField, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./style.css";
+import { NavLink } from "react-router-dom";
 
 interface Props {
   handleCreateAccount: Function;
@@ -10,20 +11,27 @@ interface Props {
 
 const CreateAccount = ({ handleCreateAccount }: Props) => {
   const [error, setError] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const schema = yup.object().shape({
     firstName: yup.string().required("First name is required"),
     lastName: yup.string().required("Last name is required"),
     password: yup
       .string()
-      .required("Password is required")
+
       .min(6, "Password must be at least 6 characters"),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords must match"),
     phoneNumber: yup
       .string()
-      .required("Phone number is required")
+
       .matches(/^\d{10}$/, "Invalid phone number"),
     address: yup.string().required("Address is required"),
   });
@@ -39,7 +47,6 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      // Handle form submission, e.g., send data to backend
       handleCreateAccount(values);
     },
   });
@@ -49,6 +56,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
       className="create-account"
       elevation={10}
       style={{ background: "#3b438b" }}
+      sx={{ margin: "auto", marginTop: "-10em", maxWidth: "50em" }}
     >
       {error && (
         <Typography color="error">Error: Failed to create account</Typography>
@@ -56,7 +64,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
       <form onSubmit={formik.handleSubmit} className="form">
         <Typography style={{ color: "#fbc02c" }}>nom</Typography>
         <TextField
-          className="inputD"
+          className="nom"
           fullWidth
           id="firstName"
           name="firstName"
@@ -67,7 +75,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         />
         <Typography style={{ color: "#fbc02c" }}>prénom</Typography>
         <TextField
-          className="inputD"
+          className="prnom"
           fullWidth
           id="lastName"
           name="lastName"
@@ -79,7 +87,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
 
         <Typography style={{ color: "#fbc02c" }}>Mot de passe</Typography>
         <TextField
-          className="inputE"
+          className="Mdp"
           fullWidth
           id="password"
           name="password"
@@ -91,7 +99,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         />
         <Typography style={{ color: "#fbc02c" }}>confirm</Typography>
         <TextField
-          className="inputE"
+          className="Cmdp"
           fullWidth
           id="confirmPassword"
           name="confirmPassword"
@@ -110,7 +118,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <Typography style={{ color: "#fbc02c" }}>address</Typography>
 
         <TextField
-          className="inputDA"
+          className="addres"
           fullWidth
           id="address"
           name="address"
@@ -123,7 +131,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
 
         <Typography style={{ color: "#fbc02c" }}>Téléphone</Typography>
         <TextField
-          className="inputD"
+          className="tele"
           fullWidth
           id="phoneNumber"
           name="phoneNumber"
@@ -145,10 +153,26 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             width: "30px",
             color: "black",
             alignItems: "flex-end",
+            left: "90%",
           }}
+          onClick={handleOpen}
         >
           Créer
         </Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+        >
+          <Box className="pop">
+            <h2 id="parent-modal-title">Félicitation!</h2>
+            <p id="parent-modal-description">Vous étes préts à commander.</p>
+            <NavLink to="/PizzaG" style={{ color: "#fbc02c" }}>
+              Passez votre première commande
+            </NavLink>
+          </Box>
+        </Modal>
       </form>
     </Card>
   );
