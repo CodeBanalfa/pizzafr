@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Pizza from "../../data/DataType";
-import { Box, Typography } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
+import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PizzaCarte from "../pizzaCarte/PizzaCarte";
-import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import "./style.css";
 
 interface Props {
@@ -11,42 +11,45 @@ interface Props {
 }
 
 const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
-  const [total, setTotal] = useState<number>(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const calculateTotal = () => {
-    let newTotal = 0;
-    pizza.forEach((pizza) => {
-      newTotal += pizza.price * (pizza.quantity ?? 0); // Utilisation de ?? pour gérer le cas où la quantité est undefined
-    });
-    setTotal(newTotal);
-  };
-  
-
-  const handleQuantityChange = (id: number, quantity: number) => {
-    // Mettez à jour la quantité de la pizza avec l'ID spécifié
-    const updatedPizza = pizza.map((p) =>
-      p.id === id ? { ...p, quantity: quantity } : p
-    );
-    handlePizzaChange(updatedPizza);
-    calculateTotal();
+  const updateTotalPrice = (price: number) => {
+    setTotalPrice(totalPrice + price);
   };
 
   return (
     <>
-      <Typography variant="h5" className="text">
+      <Typography
+        variant="h5"
+        className="text"
+        style={{
+          display: "flex",
+          top: "6px",
+          left: "70%",
+          fontFamily: "cursive",
+        }}
+      >
         Sélectionnez vos pizzas
       </Typography>
       <Box
-        display="flex"
-        alignItems="center"
-        marginBottom="50px"
-        className="toto"
+        sx={{
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+          gap: 1,
+        }}
       >
-        <AddShoppingCartOutlinedIcon
-          sx={{ fontSize: 50, padding: "5px 7px 9px 10px" }}
-        />
-        <Typography variant="h5" sx={{ fontSize: 30, marginLeft: 6 }}>
-          Total: {total.toFixed(2)} €
+        <Typography
+          variant="h5"
+          color="#000000"
+          display="flex"
+          marginBottom="50px"
+          className="toto"
+        >
+          Total Price: {totalPrice.toFixed(2)} €
+          <IconButton aria-label="add to shopping cart" sx={{ color: "black" }}>
+            <AddShoppingCartIcon />
+          </IconButton>
         </Typography>
       </Box>
       <Box
@@ -61,10 +64,11 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
       >
         {pizza?.map((pizza) => (
           <PizzaCarte
-            key={pizza.id} // Utilisez l'ID comme clé
+            key={pizza.id}
             pizza={pizza}
-            handleQuantityChange={(quantity: number) =>
-              handleQuantityChange(pizza.id, quantity)
+            updateTotalPrice={updateTotalPrice}
+            updateQuantity={(quantity: number) =>
+              handlePizzaChange(pizza.id, quantity)
             }
           />
         ))}

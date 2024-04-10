@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import Pizza from "../../data/DataType";
 import {
   Button,
   Card,
@@ -5,100 +7,124 @@ import {
   CardContent,
   CardMedia,
   Chip,
-  TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
-import Pizza from "../../data/DataType";
 import "./style.css";
 
 interface CProps {
   pizza: Pizza;
-  handleQuantityChange: (quantity: number) => void;
+  updateTotalPrice: (price: number) => void;
+  updateQuantity: (quantity: number) => void;
 }
 
-const PizzaCarte = ({ pizza, handleQuantityChange }: CProps) => {
-  const [quantity, setQuantity] = useState<number>(1); // Initialisé à 1 pour respecter le minimum requis
+const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
+  const [quantity, setQuantity] = useState(pizza.quantity || 0);
 
   const handleIncrement = () => {
     if (quantity < 10) {
-      setQuantity(quantity + 1);
+      const newQuantity = quantity + 1;
+      setQuantity(newQuantity);
+      updateQuantity(newQuantity);
+      updateTotalPrice(pizza.price);
     }
   };
 
   const handleDecrement = () => {
-    if (quantity > 1) {
-      setQuantity(quantity - 1);
+    if (quantity > 0) {
+      const newQuantity = quantity - 1;
+      setQuantity(newQuantity);
+      updateQuantity(newQuantity);
+      updateTotalPrice(-pizza.price);
     }
   };
 
   return (
-    <>
-      <Card
-        className="Carte"
+    <Card className="Carte">
+      <CardMedia
+        component="img"
+        alt="Pizza image"
+        image={pizza.image}
+        sx={{ width: 140, height: 140, marginRight: 2 }}
+      />
+      <CardContent sx={{ flex: 1 }} className="carte">
+        <Typography
+          gutterBottom
+          variant="h5"
+          component="div"
+          style={{ fontFamily: "cursive" }}
+        >
+          {pizza.name}
+        </Typography>
+        <Typography
+          variant="body2"
+          color="text.secondary"
+          style={{ fontFamily: "cursive" }}
+        >
+          {pizza.description}
+        </Typography>
+      </CardContent>
+      <CardContent
         sx={{
           display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          borderRadius: "10px",
-          width: "100%",
+          flexDirection: "column",
+          alignItems: "flex-end",
         }}
       >
-        <CardMedia
-          component="img"
-          alt="Pizza image"
-          image={pizza.image}
-          sx={{ width: 140, height: 140, marginRight: 2 }}
-        />
-        <CardContent sx={{ flex: 1, width: "100%" }}>
-          <Typography gutterBottom variant="h5" component="div">
-            {pizza.name}
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            {pizza.description}
-          </Typography>
-        </CardContent>
         <CardContent
           sx={{
             display: "flex",
             flexDirection: "column",
-            alignItems: "flex-end",
+            alignItems: "center",
           }}
         >
+          <div className="container"></div>
           <Typography variant="body2" color="text.secondary">
             <Chip
               className="chip"
-              style={{ backgroundColor: "green", color: "white" }}
+              style={{
+                backgroundColor: "green",
+                color: "white",
+                fontFamily: "cursive",
+                fontSize: "20px",
+                width: "100px",
+              }}
               label={`${pizza.price}€`}
               size="medium"
             />
           </Typography>
           <CardActions>
-            <Typography variant="body2" color="text.secondary">
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{ fontFamily: "cursive" }}
+            >
               Quantité
             </Typography>
-            <Button size="small" onClick={handleDecrement}>
+            <Button
+              size="small"
+              onClick={handleDecrement}
+              style={{ fontFamily: "cursive", fontSize: "40px" }}
+            >
               -
             </Button>
-            <TextField
-              type="number"
-              variant="outlined"
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              style={{ fontFamily: "cursive", fontSize: "20px" }}
+            >
+              {quantity}
+            </Typography>
+            <Button
               size="small"
-              value={quantity}
-              InputProps={{ inputProps: { min: 1, max: 10 } }} // Plage de 1 à 10
-              onChange={(e) => {
-                const newQuantity = parseInt(e.target.value);
-                setQuantity(newQuantity);
-                handleQuantityChange(newQuantity);
-              }}
-            />
-            <Button size="small" onClick={handleIncrement}>
+              onClick={handleIncrement}
+              style={{ fontFamily: "cursive", fontSize: "40px" }}
+            >
               +
             </Button>
           </CardActions>
         </CardContent>
-      </Card>
-    </>
+      </CardContent>
+    </Card>
   );
 };
 
