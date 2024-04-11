@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import Pizza from "../../data/DataType";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, IconButton, Modal, Typography } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PizzaCarte from "../pizzaCarte/PizzaCarte";
+import MopedIcon from "@mui/icons-material/Moped";
 import "./style.css";
+import { Link } from "react-router-dom";
 
 interface Props {
   pizza: Pizza[];
@@ -15,6 +17,13 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
 
   const updateTotalPrice = (price: number) => {
     setTotalPrice(totalPrice + price);
+  };
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   return (
@@ -47,7 +56,11 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
           className="toto"
         >
           Total Price: {totalPrice.toFixed(2)} €
-          <IconButton aria-label="add to shopping cart" sx={{ color: "black" }}>
+          <IconButton
+            aria-label="add to shopping cart"
+            sx={{ color: "black" }}
+            onClick={handleOpen}
+          >
             <AddShoppingCartIcon />
           </IconButton>
         </Typography>
@@ -72,6 +85,30 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
             }
           />
         ))}
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="transition-modal-title"
+          aria-describedby="transition-modal-description"
+        >
+          <Box className="pop">
+            <h2 id="parent-modal-title">Félicitation!</h2>
+            <p id="parent-modal-description">
+              Votre à commande est en prépartion.
+            </p>
+            <p id="parent-modal-description">
+              Elle sera livrée dans30 minutes.
+            </p>
+            <MopedIcon style={{ width: "100%", height: "300px" }} />
+            <Link
+              to="/PizzaG"
+              onClick={handleClose}
+              style={{ color: "#fbc02c" }}
+            >
+              Retour à la page de commande
+            </Link>
+          </Box>
+        </Modal>
       </Box>
     </>
   );

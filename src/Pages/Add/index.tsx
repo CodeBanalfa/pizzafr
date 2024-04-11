@@ -20,12 +20,10 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
   };
 
   const schema = yup.object().shape({
-    firstName: yup.string().required("First name is required"),
-    lastName: yup.string().required("Last name is required"),
-    password: yup
-      .string()
+    firstName: yup.string(),
+    lastName: yup.string(),
+    password: yup.string().min(6, "Password must be at least 6 characters"),
 
-      .min(6, "Password must be at least 6 characters"),
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords must match"),
@@ -33,7 +31,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
       .string()
 
       .matches(/^\d{10}$/, "Invalid phone number"),
-    address: yup.string().required("Address is required"),
+    address: yup.string(),
   });
 
   const formik = useFormik({
@@ -120,7 +118,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             color: "#fbc02c",
             position: "absolute",
             left: "10px",
-            top: "25%",
+            top: "20%",
           }}
         >
           Mot de passe
@@ -146,7 +144,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             color: "#fbc02c",
             position: "absolute",
             right: "30%",
-            top: "25%",
+            top: "20%",
             padding: "9px",
           }}
         >
@@ -174,7 +172,16 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           }}
         />
 
-        <Typography style={{ color: "#fbc02c" }}>address</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            left: "20px",
+            top: "40%",
+          }}
+        >
+          address
+        </Typography>
 
         <TextField
           className="addres"
@@ -185,12 +192,32 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           onChange={formik.handleChange}
           error={formik.touched.address && Boolean(formik.errors.address)}
           helperText={formik.touched.address && formik.errors.address}
-          style={{ width: "100%", height: "70%", flexFlow: "row wrap" }}
+          style={{
+            width: "100%",
+            height: "150px",
+            flexFlow: "row wrap",
+            right: "80%",
+          }}
         />
 
-        <Typography style={{ color: "#fbc02c" }}>Téléphone</Typography>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            position: "absolute",
+            left: "10px",
+            top: "75%",
+          }}
+        >
+          Téléphone
+        </Typography>
         <TextField
           className="tele"
+          style={{
+            top: "30px",
+            right: "245px",
+            display: "flex",
+            flexFlow: "row wrap",
+          }}
           fullWidth
           id="phoneNumber"
           name="phoneNumber"
@@ -227,6 +254,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           <Box className="pop">
             <h2 id="parent-modal-title">Félicitation!</h2>
             <p id="parent-modal-description">Vous étes préts à commander.</p>
+
             <NavLink to="/PizzaG" style={{ color: "#fbc02c" }}>
               Passez votre première commande
             </NavLink>
