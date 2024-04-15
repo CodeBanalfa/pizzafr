@@ -26,6 +26,12 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
     setOpen(false);
   };
 
+  const handleOrder = () => {
+    if (totalPrice > 0) {
+      handleOpen();
+    }
+  };
+
   return (
     <>
       <Typography
@@ -59,7 +65,7 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
           <IconButton
             aria-label="add to shopping cart"
             sx={{ color: "black" }}
-            onClick={handleOpen}
+            onClick={handleOrder}
           >
             <AddShoppingCartIcon />
           </IconButton>
@@ -94,10 +100,10 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
           <Box className="pop">
             <h2 id="parent-modal-title">Félicitation!</h2>
             <p id="parent-modal-description">
-              Votre à commande est en prépartion.
+              Votre commande est en préparation.
             </p>
             <p id="parent-modal-description">
-              Elle sera livrée dans30 minutes.
+              Elle sera livrée dans 30 minutes.
             </p>
             <MopedIcon style={{ width: "100%", height: "300px" }} />
             <Link
