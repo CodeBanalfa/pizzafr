@@ -2,10 +2,10 @@ import { Button, Card, TextField, Typography } from "@mui/material";
 import "./style.css";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { Route, Routes } from "react-router-dom";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Link } from "react-router-dom";
+import AuthenticationService from "../service/AuthenticationService";
 
 interface Props {
   setIsAuthenticated: Function;
@@ -13,14 +13,12 @@ interface Props {
 
 const Login = ({ setIsAuthenticated }: Props) => {
   const { t } = useTranslation();
-
-  const [error, setError] = useState<boolean>(false);
-
+  const [error, setError] = useState<string>("");
   const schema = yup.object().shape({
     login: yup
       .string()
       .required("Phone number is required")
-      .matches(/^\d{4}$/, "Invalid phone number"),
+      .matches(/^\d{10}$/, "Invalid phone number"),
     password: yup
       .string()
       .required(t("error.required", { field: t("common.passwordPlaceholder") }))
@@ -38,13 +36,15 @@ const Login = ({ setIsAuthenticated }: Props) => {
     },
     validationSchema: schema,
     onSubmit: (values) => {
-      if (values.login === "0000" && values.password === "titi") {
-        // dire à l'application qu'on est connecté
-        setIsAuthenticated(true);
-      } else {
-        // afficher un message d'erreur
-        setError(true);
-      }
+      AuthenticationService.login(values.login, values.password)
+        .then((response) => {
+          setIsAuthenticated(response);
+          setError(response ? "" : t("common.loginError"));
+        })
+        .catch((reason) => {
+          console.error(reason);
+          setError(t("common.technicalError"));
+        });
     },
   });
 

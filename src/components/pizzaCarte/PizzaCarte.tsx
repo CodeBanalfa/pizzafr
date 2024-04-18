@@ -43,7 +43,7 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
       <CardMedia
         component="img"
         alt="Pizza image"
-        image={pizza.image}
+        image={`/assets/${pizza.image}`}
         sx={{ width: 140, height: 140, marginRight: 2 }}
       />
       <CardContent sx={{ flex: 1 }} className="carte">
@@ -77,7 +77,6 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
             alignItems: "center",
           }}
         >
-          <div className="container"></div>
           <Typography variant="body2" color="text.secondary">
             <Chip
               className="chip"
@@ -93,11 +92,7 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
             />
           </Typography>
           <CardActions>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              style={{ fontFamily: "cursive" }}
-            >
+            <Typography variant="body2" color="text.secondary">
               Quantité
             </Typography>
             <Button
@@ -107,11 +102,7 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
             >
               -
             </Button>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              style={{ fontFamily: "cursive", fontSize: "20px" }}
-            >
+            <Typography variant="body2" color="text.secondary">
               {quantity}
             </Typography>
             <Button

@@ -3,6 +3,11 @@
     "loginPlaceholder": "login",
     "passwordPlaceholder": "password",
     "connect": "connect",
-    "loginError": "Can not connect"
+    "loginError": "Can not connect",
+    "technicalError": "probléme téchnique "
+  },
+  "error": {
+    "minLen": "Erreur",
+    "required": "erreur"
   }
 }

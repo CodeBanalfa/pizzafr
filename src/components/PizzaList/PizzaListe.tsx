@@ -8,11 +8,11 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 interface Props {
-  pizza: Pizza[];
+  pizzas: Pizza[] | undefined;
   handlePizzaChange: Function;
 }
 
-const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
+const PizzaListe = ({ pizzas, handlePizzaChange }: Props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const updateTotalPrice = (price: number) => {
@@ -35,7 +35,7 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
   return (
     <>
       <Typography
-        variant="h5"
+        variant="h2"
         className="text"
         style={{
           display: "flex",
@@ -55,7 +55,7 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
         }}
       >
         <Typography
-          variant="h5"
+          variant="h2"
           color="#000000"
           display="flex"
           marginBottom="50px"
@@ -67,7 +67,7 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
             sx={{ color: "black" }}
             onClick={handleOrder}
           >
-            <AddShoppingCartIcon />
+            <AddShoppingCartIcon style={{ fontSize: "1.5em" }} />
           </IconButton>
         </Typography>
       </Box>
@@ -81,7 +81,7 @@ const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
         id="list"
         style={{ borderRadius: "100px" }}
       >
-        {pizza?.map((pizza) => (
+        {pizzas?.map((pizza: Pizza) => (
           <PizzaCarte
             key={pizza.id}
             pizza={pizza}

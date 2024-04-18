@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-  BrowserRouter,
-  Navigate,
-} from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import Header from "./components/Header";
 import Login from "./Pages/login";
-import PizzaG from "./Pages/Pizza";
 import CreateAccount from "./Pages/Add";
+import AuthenticationService from "./Pages/service/AuthenticationService";
+import PizzaG from "./Pages/Pizza";
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(
+    AuthenticationService.isAuthenticated()
+  );
 
   return (
     <>
@@ -24,7 +21,7 @@ const App = () => {
             path="/"
             element={
               isAuthenticated ? (
-                <Navigate to="/PizzaG" />
+                <Navigate to="/PizzaG" replace />
               ) : (
                 <Login setIsAuthenticated={setIsAuthenticated} />
               )
@@ -36,7 +33,7 @@ const App = () => {
               !isAuthenticated ? (
                 <CreateAccount handleCreateAccount={Function} />
               ) : (
-                <Navigate to="/PizzaG" />
+                <Navigate to="/PizzaG" replace />
               )
             }
           />

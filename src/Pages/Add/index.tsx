@@ -60,14 +60,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <Typography color="error">Error: Failed to create account</Typography>
       )}
       <form onSubmit={formik.handleSubmit} className="form">
-        <Typography
-          style={{
-            color: "#fbc02c",
-            position: "absolute",
-            left: "10px",
-            top: "20px",
-          }}
-        >
+        <Typography style={{ color: "#fbc02c", right: "80%", top: "0px" }}>
           nom
         </Typography>
 
