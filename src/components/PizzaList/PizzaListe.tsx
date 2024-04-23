@@ -8,11 +8,11 @@ import "./style.css";
 import { Link } from "react-router-dom";
 
 interface Props {
-  pizzas: Pizza[] | undefined;
+  pizza: Pizza[];
   handlePizzaChange: Function;
 }
 
-const PizzaListe = ({ pizzas, handlePizzaChange }: Props) => {
+const PizzaListe = ({ pizza, handlePizzaChange }: Props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   const updateTotalPrice = (price: number) => {
@@ -81,7 +81,7 @@ const PizzaListe = ({ pizzas, handlePizzaChange }: Props) => {
         id="list"
         style={{ borderRadius: "100px" }}
       >
-        {pizzas?.map((pizza: Pizza) => (
+        {pizza?.map((pizza) => (
           <PizzaCarte
             key={pizza.id}
             pizza={pizza}

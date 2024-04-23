@@ -25,7 +25,7 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
       const newQuantity = quantity + 1;
       setQuantity(newQuantity);
       updateQuantity(newQuantity);
-      updateTotalPrice(pizza.price);
+      updateTotalPrice(pizza.price); // Corrigez l'appel avec le bon prix
     }
   };
 
@@ -34,7 +34,7 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
       const newQuantity = quantity - 1;
       setQuantity(newQuantity);
       updateQuantity(newQuantity);
-      updateTotalPrice(-pizza.price);
+      updateTotalPrice(-pizza.price); // Utilisez le prix négatif pour le décrément
     }
   };
 
@@ -46,20 +46,11 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
         image={`/assets/${pizza.image}`}
         sx={{ width: 140, height: 140, marginRight: 2 }}
       />
-      <CardContent sx={{ flex: 1 }} className="carte">
-        <Typography
-          gutterBottom
-          variant="h5"
-          component="div"
-          style={{ fontFamily: "cursive" }}
-        >
+      <CardContent sx={{ flex: 1 }}>
+        <Typography gutterBottom variant="h5" style={{ fontFamily: "cursive" }}>
           {pizza.name}
         </Typography>
-        <Typography
-          variant="body2"
-          color="text.secondary"
-          style={{ fontFamily: "cursive" }}
-        >
+        <Typography variant="body2" color="text.secondary">
           {pizza.description}
         </Typography>
       </CardContent>
@@ -67,53 +58,26 @@ const PizzaCarte = ({ pizza, updateTotalPrice, updateQuantity }: CProps) => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          alignItems: "flex-end",
+          alignItems: "center",
         }}
       >
-        <CardContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
+        <Typography variant="body2" color="text.secondary">
+          <Chip className="chip" label={`${pizza.price}€`} size="medium" />
+        </Typography>
+        <CardActions>
           <Typography variant="body2" color="text.secondary">
-            <Chip
-              className="chip"
-              style={{
-                backgroundColor: "green",
-                color: "white",
-                fontFamily: "cursive",
-                fontSize: "20px",
-                width: "100px",
-              }}
-              label={`${pizza.price}€`}
-              size="medium"
-            />
+            Quantité
           </Typography>
-          <CardActions>
-            <Typography variant="body2" color="text.secondary">
-              Quantité
-            </Typography>
-            <Button
-              size="small"
-              onClick={handleDecrement}
-              style={{ fontFamily: "cursive", fontSize: "40px" }}
-            >
-              -
-            </Button>
-            <Typography variant="body2" color="text.secondary">
-              {quantity}
-            </Typography>
-            <Button
-              size="small"
-              onClick={handleIncrement}
-              style={{ fontFamily: "cursive", fontSize: "40px" }}
-            >
-              +
-            </Button>
-          </CardActions>
-        </CardContent>
+          <Button size="small" onClick={handleDecrement}>
+            -
+          </Button>
+          <Typography variant="body2" color="text.secondary">
+            {quantity}
+          </Typography>
+          <Button size="small" onClick={handleIncrement}>
+            +
+          </Button>
+        </CardActions>
       </CardContent>
     </Card>
   );

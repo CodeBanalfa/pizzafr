@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "./style.css";
 import { NavLink } from "react-router-dom";
+import AddUserService from "../service/AddUserService";
 
 interface Props {
   handleCreateAccount: Function;
@@ -23,29 +24,41 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
     firstName: yup.string(),
     lastName: yup.string(),
     password: yup.string().min(6, "Password must be at least 6 characters"),
-
     confirmPassword: yup
       .string()
       .oneOf([yup.ref("password")], "Passwords must match"),
     phoneNumber: yup
       .string()
-
-      .matches(/^\d{10}$/, "Invalid phone number"),
+      .required("Phone number is required")
+      .matches(/^[0-9]+$/, "Phone number must contain only digits"),
     address: yup.string(),
   });
 
   const formik = useFormik({
     initialValues: {
+      username: 0,
       firstName: "",
       lastName: "",
       password: "",
       confirmPassword: "",
-      phoneNumber: "",
+      phoneNumber: 0, // Modifier phoneNumber pour qu'il soit une chaîne de caractères
       address: "",
     },
     validationSchema: schema,
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       handleCreateAccount(values);
+      try {
+        await AddUserService.savUser(
+          values.username,
+          values.password,
+          values.firstName,
+          values.lastName,
+          values.address
+        );
+      } catch (error) {
+        console.error("Error while saving user:", error);
+        setError(true); // Définir l'erreur à true en cas d'échec
+      }
     },
   });
 
@@ -60,7 +73,14 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <Typography color="error">Error: Failed to create account</Typography>
       )}
       <form onSubmit={formik.handleSubmit} className="form">
-        <Typography style={{ color: "#fbc02c", right: "80%", top: "0px" }}>
+        <Typography
+          style={{
+            color: "#fbc02c",
+            right: "0%",
+            top: "0px",
+            marginRight: "1em",
+          }}
+        >
           nom
         </Typography>
 

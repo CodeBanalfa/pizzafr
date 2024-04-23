@@ -28,9 +28,7 @@
 .addres,
 .tele {
   background: #f1efea;
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
+  margin-right: 1em;
 }
 
 .submit-button {
@@ -41,20 +39,20 @@
   margin-top: 20px;
   right: 30%;
 }
+
 .pop {
   position: absolute;
-  top: 50%;
-  right: 30%;
-  padding: 70%;
+  top: 80px;
+  left: 80px;
   transform: translate(-50%, -50%);
   width: 500px;
+  max-width: 50%; /* Ajoutez une largeur maximale pour s'assurer que la boîte reste visible sur les petits écrans */
   background-color: #3b438b;
   color: #efb20d;
   border: 2px solid #000000;
-  box-shadow: 5px;
-  padding: 50px;
+  padding: 70px;
   text-align: center;
   font-family: "Times New Roman", Times, serif;
   font-size: larger;
-  border-radius: 50px;
+  border-radius: 10px; /* Réduisez le rayon du bord pour un aspect plus propre */
 }

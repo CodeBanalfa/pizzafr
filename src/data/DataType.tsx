@@ -5,7 +5,8 @@ export default class Pizza {
   image: string;
   price: number;
   quantity?: number;
-   
+  static id: number;
+
   constructor(
     id: number,
     name: string,
@@ -19,6 +20,6 @@ export default class Pizza {
     this.description = description;
     this.image = image;
     this.price = price;
-    this.quantity= quantity;
+    this.quantity = quantity;
   }
 }

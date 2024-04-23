@@ -29,7 +29,7 @@ const PizzaG = () => {
 
   return (
     <>
-      <PizzaListe pizzas={pizzaOrigin} handlePizzaChange={handlePizzaChange} />
+      <PizzaListe pizza={pizzaOrigin} handlePizzaChange={handlePizzaChange} />
     </>
   );
 };

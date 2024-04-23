@@ -1,8 +1,14 @@
 import React from "react";
 import "./style.css";
-import { AppBar, Box, Typography } from "@mui/material";
+import { AppBar, Box, IconButton, Typography } from "@mui/material";
+import AuthenticationService from "../../Pages/service/AuthenticationService";
+import { Logout } from "@mui/icons-material";
+interface Props {
+  isAuthenticated: boolean;
+  setIsAuthenticated: Function;
+}
 
-const index = () => {
+const index = ({ isAuthenticated, setIsAuthenticated }: Props) => {
   return (
     <>
       <AppBar position="static">
@@ -16,6 +22,21 @@ const index = () => {
             Chez Mario
           </Typography>
         </Box>
+        {isAuthenticated && (
+          <>
+            <Box>
+              <IconButton
+                color="inherit"
+                onClick={() => {
+                  AuthenticationService.logout();
+                }}
+                title="logout"
+              >
+                <Logout />
+              </IconButton>
+            </Box>
+          </>
+        )}
       </AppBar>
     </>
   );

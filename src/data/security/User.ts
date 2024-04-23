@@ -1,20 +1,23 @@
 export default class User {
-  username: string;
+  username: number;
   firstname: string;
   lastname: string;
   role: string;
-  hasPicture: boolean;
+  phoneNumber: number;
+  address: string;
   constructor(
-    username: string,
+    username: number,
     firstname: string,
     lastname: string,
+    phoneNumber: number,
     role: string,
-    hasPicture: boolean
+    address: string
   ) {
     this.username = username;
     this.firstname = firstname;
     this.lastname = lastname;
     this.role = role;
-    this.hasPicture = hasPicture;
+    this.phoneNumber = phoneNumber;
+    this.address = address;
   }
 }

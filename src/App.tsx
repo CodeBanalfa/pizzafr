@@ -14,7 +14,10 @@ const App = () => {
 
   return (
     <>
-      <Header />
+      <Header
+        setIsAuthenticated={setIsAuthenticated}
+        isAuthenticated={isAuthenticated}
+      />
       <main>
         <Routes>
           <Route
