@@ -1,15 +1,15 @@
 export default class User {
-  username: number;
+  username: number | string;
   firstname: string;
   lastname: string;
   role: string;
-  phoneNumber: number;
+  phoneNumber: string;
   address: string;
   constructor(
-    username: number,
+    username: string,
     firstname: string,
     lastname: string,
-    phoneNumber: number,
+    phoneNumber: string,
     role: string,
     address: string
   ) {

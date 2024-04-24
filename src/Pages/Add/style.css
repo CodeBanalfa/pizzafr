@@ -28,7 +28,6 @@
 .addres,
 .tele {
   background: #f1efea;
-  margin-right: 1em;
 }
 
 .submit-button {
@@ -41,12 +40,9 @@
 }
 
 .pop {
-  position: absolute;
-  top: 80px;
-  left: 80px;
-  transform: translate(-50%, -50%);
+  transform: translate(50%, 50%);
   width: 500px;
-  max-width: 50%; /* Ajoutez une largeur maximale pour s'assurer que la boîte reste visible sur les petits écrans */
+  max-width: 50%;
   background-color: #3b438b;
   color: #efb20d;
   border: 2px solid #000000;
@@ -54,5 +50,5 @@
   text-align: center;
   font-family: "Times New Roman", Times, serif;
   font-size: larger;
-  border-radius: 10px; /* Réduisez le rayon du bord pour un aspect plus propre */
+  border-radius: 10px;
 }

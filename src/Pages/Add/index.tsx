@@ -5,63 +5,74 @@ import * as yup from "yup";
 import "./style.css";
 import { NavLink } from "react-router-dom";
 import AddUserService from "../service/AddUserService";
-
+import CreateAccountService from "../service/AddUserService";
+import User from "../../data/security/User";
+import Add from "../../data/security/addDate";
 interface Props {
-  handleCreateAccount: Function;
+  handleCreateAccount: (user: Add) => void;
 }
 
 const CreateAccount = ({ handleCreateAccount }: Props) => {
-  const [error, setError] = useState<boolean>(false);
+  const [error, setError] = useState(false);
   const [open, setOpen] = useState(false);
+
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
 
-  const schema = yup.object().shape({
-    firstName: yup.string(),
-    lastName: yup.string(),
-    password: yup.string().min(6, "Password must be at least 6 characters"),
+  const validationSchema = yup.object({
+    firstName: yup.string().required("Le prénom est requis"),
+    lastName: yup.string().required("Le nom est requis"),
+    username: yup.string().required("Le nom d'utilisateur est requis"),
+    password: yup
+      .string()
+      .min(6, "Le mot de passe doit contenir au moins 6 caractères")
+      .required("Le mot de passe est requis"),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Passwords must match"),
+      .oneOf([yup.ref("password")], "Les mots de passe doivent correspondre")
+      .required("La confirmation du mot de passe est requise"),
     phoneNumber: yup
       .string()
-      .required("Phone number is required")
-      .matches(/^[0-9]+$/, "Phone number must contain only digits"),
-    address: yup.string(),
+      .matches(
+        /^\d+$/,
+        "Le numéro de téléphone doit contenir uniquement des chiffres"
+      )
+      .required("Le numéro de téléphone est requis"),
+    address: yup.string().required("L'adresse est requise"),
   });
 
   const formik = useFormik({
     initialValues: {
-      username: 0,
+      username: "",
       firstName: "",
       lastName: "",
       password: "",
       confirmPassword: "",
-      phoneNumber: 0, // Modifier phoneNumber pour qu'il soit une chaîne de caractères
+      phoneNumber: "",
       address: "",
     },
-    validationSchema: schema,
+    validationSchema,
     onSubmit: async (values) => {
-      handleCreateAccount(values);
-      try {
-        await AddUserService.savUser(
-          values.username,
-          values.password,
-          values.firstName,
-          values.lastName,
-          values.address
-        );
-      } catch (error) {
-        console.error("Error while saving user:", error);
-        setError(true); // Définir l'erreur à true en cas d'échec
-      }
+      const newAdd = new Add(
+        values.username,
+        values.firstName,
+        values.lastName,
+        values.password,
+        values.phoneNumber,
+        values.address,
+        [] // Si vous avez un rôle par défaut, vous pouvez le définir ici
+      );
+
+      CreateAccountService.save(newAdd);
+      handleCreateAccount(newAdd);
+      handleOpen();
     },
   });
-
   return (
     <Card
       className="create-account"
@@ -76,9 +87,9 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <Typography
           style={{
             color: "#fbc02c",
-            right: "0%",
-            top: "0px",
-            marginRight: "1em",
+            left: "10px",
+            top: "3%",
+            position: "absolute",
           }}
         >
           nom
@@ -105,7 +116,8 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             position: "absolute",
             right: "30%",
             top: "20px",
-            padding: "9px",
+            padding: "1px",
+            marginRight: "1em",
           }}
         >
           prénom
@@ -132,6 +144,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             position: "absolute",
             left: "10px",
             top: "20%",
+            padding: "20px",
           }}
         >
           Mot de passe
@@ -156,12 +169,12 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           style={{
             color: "#fbc02c",
             position: "absolute",
-            right: "30%",
+            right: "25%",
             top: "20%",
-            padding: "9px",
+            padding: "20px",
           }}
         >
-          confirm
+          confirmtion
         </Typography>
         <TextField
           className="Cmdp"
@@ -189,8 +202,9 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           style={{
             color: "#fbc02c",
             position: "absolute",
-            left: "20px",
+            left: "10px",
             top: "40%",
+            padding: "20px",
           }}
         >
           address
@@ -219,6 +233,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
             position: "absolute",
             left: "10px",
             top: "75%",
+            padding: "15px",
           }}
         >
           Téléphone
@@ -226,7 +241,7 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
         <TextField
           className="tele"
           style={{
-            top: "30px",
+            top: "50px",
             right: "245px",
             display: "flex",
             flexFlow: "row wrap",
@@ -264,7 +279,10 @@ const CreateAccount = ({ handleCreateAccount }: Props) => {
           aria-labelledby="transition-modal-title"
           aria-describedby="transition-modal-description"
         >
-          <Box className="pop">
+          <Box
+            className="pop"
+            sx={{ position: "absolute", top: "50px", left: "70px" }}
+          >
             <h2 id="parent-modal-title">Félicitation!</h2>
             <p id="parent-modal-description">Vous étes préts à commander.</p>
 

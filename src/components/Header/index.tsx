@@ -21,22 +21,22 @@ const index = ({ isAuthenticated, setIsAuthenticated }: Props) => {
           >
             Chez Mario
           </Typography>
+          <Box style={{ top: "0px", left: "10px" }}>
+            {isAuthenticated && (
+              <>
+                <IconButton
+                  color="inherit"
+                  onClick={() => {
+                    AuthenticationService.logout();
+                  }}
+                  title="logout"
+                >
+                  <Logout />
+                </IconButton>
+              </>
+            )}
+          </Box>
         </Box>
-        {isAuthenticated && (
-          <>
-            <Box>
-              <IconButton
-                color="inherit"
-                onClick={() => {
-                  AuthenticationService.logout();
-                }}
-                title="logout"
-              >
-                <Logout />
-              </IconButton>
-            </Box>
-          </>
-        )}
       </AppBar>
     </>
   );
