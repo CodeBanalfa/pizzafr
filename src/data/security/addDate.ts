@@ -20,7 +20,6 @@ export default class Add {
     this.firstName = firstName;
     this.lastName = lastName;
     this.password = password;
-
     this.phoneNumber = phoneNumber;
     this.address = address;
     this.role = role;

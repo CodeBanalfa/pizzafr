@@ -4,16 +4,14 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "./style.css";
 import { NavLink } from "react-router-dom";
-import AddUserService from "../service/AddUserService";
 import CreateAccountService from "../service/AddUserService";
-import User from "../../data/security/User";
 import Add from "../../data/security/addDate";
 interface Props {
   handleCreateAccount: (user: Add) => void;
 }
 
 const CreateAccount = ({ handleCreateAccount }: Props) => {
-  const [error, setError] = useState(false);
+  const [error ] = useState(false);
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
